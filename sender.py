@@ -1,11 +1,12 @@
+import base64
 import socket
 import zlib
-import base64
 import os
 from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
+
 
 
 def load_private_key(file_path: str):
@@ -33,9 +34,9 @@ def sign_message(message: bytes, private_key) -> bytes:
 
 def encrypt_payload(payload: bytes, receiver_public_key) -> bytes:
     compressed_payload = zlib.compress(payload)
-
-    aes_key = os.urandom(32)
+    
     iv = os.urandom(16)
+    aes_key = os.urandom(32)
 
     cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv), backend=default_backend())
     encryptor = cipher.encryptor()
