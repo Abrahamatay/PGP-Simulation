@@ -1,6 +1,6 @@
+import base64
 import socket
 import zlib
-import base64
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -23,17 +23,17 @@ def receive_packet(port: int = 4040) -> bytes:
         server_socket.listen(1)
         print(f"Receiver is listening on port {port}...")
 
-        conn, addr = server_socket.accept()
-        print(f"Connected by {addr}")
+        connection, address = server_socket.accept()
+        print(f"Connected by {address}")
 
         data = b""
         while True:
-            packet = conn.recv(4096)
+            packet = connection.recv(4096)
             if not packet:
                 break
             data += packet
 
-        conn.close()
+        connection.close()
         return data
 
 
