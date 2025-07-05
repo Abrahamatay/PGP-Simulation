@@ -7,3 +7,13 @@ This project simulates the Pretty Good Privacy (PGP) protocol for secure communi
 - AES encryption for message confidentiality
 - Digital signature for message integrity
 - Secure message transmission via TCP sockets
+
+Run the sender and receiver Python scripts:
+python3 sender.py
+python3 receiver.py
+
+Requirements:
+
+    Python 3.x
+
+    cryptography library
